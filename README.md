@@ -8,19 +8,19 @@ The project spans three major components:
 - Compiler Construction
 Together, these components form an end-to-end toolchain capable of translating high-level Jack programs into executable code for the Hack computer.
 
-Jack Source 
-    ↓ 
-Tokenizer
-    ↓ 
-Parser 
-    ↓ 
-VM Code 
-    ↓ 
-VM Translator 
-    ↓ 
-Hack Assembly 
-    ↓ 
-Hack Machine Code
+- Jack Source 
+-    ↓ 
+- Tokenizer
+-    ↓ 
+- Parser 
+-    ↓ 
+- VM Code 
+-    ↓ 
+- VM Translator
+-    ↓ 
+- Hack Assembly 
+-    ↓ 
+- Hack Machine Code
 
 # Hardware Design
 The hardware portion focuses on memory architecture and processor extensions using Hack HDL.
