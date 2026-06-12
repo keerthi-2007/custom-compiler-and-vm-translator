@@ -1,0 +1,393 @@
+// Multiplier.hdl
+// 16x16 Wallace-style multiplier
+
+CHIP Multiplier {
+    IN a[16], b[16];
+    OUT outLow[16], outHigh[16];
+
+    PARTS:
+
+// ---------- Partial Products ----------
+PP(a = a, b = b[0], out[0] = pp0b0, out[1] = pp0b1, out[2] = pp0b2, out[3] = pp0b3, out[4] = pp0b4, out[5] = pp0b5, out[6] = pp0b6, out[7] = pp0b7, out[8] = pp0b8, out[9] = pp0b9, out[10] = pp0b10, out[11] = pp0b11, out[12] = pp0b12, out[13] = pp0b13, out[14] = pp0b14, out[15] = pp0b15);
+PP(a = a, b = b[1], out[0] = pp1b0, out[1] = pp1b1, out[2] = pp1b2, out[3] = pp1b3, out[4] = pp1b4, out[5] = pp1b5, out[6] = pp1b6, out[7] = pp1b7, out[8] = pp1b8, out[9] = pp1b9, out[10] = pp1b10, out[11] = pp1b11, out[12] = pp1b12, out[13] = pp1b13, out[14] = pp1b14, out[15] = pp1b15); 
+PP(a = a, b = b[2], out[0] = pp2b0, out[1] = pp2b1, out[2] = pp2b2, out[3] = pp2b3, out[4] = pp2b4, out[5] = pp2b5, out[6] = pp2b6, out[7] = pp2b7, out[8] = pp2b8, out[9] = pp2b9, out[10]= pp2b10, out[11] = pp2b11, out[12] = pp2b12, out[13] = pp2b13, out[14] = pp2b14, out[15] = pp2b15);
+PP(a = a, b = b[3], out[0] = pp3b0, out[1]=pp3b1,out[2]=pp3b2,out[3]=pp3b3,out[4]=pp3b4,out[5]=pp3b5,out[6]=pp3b6,out[7]=pp3b7,out[8]=pp3b8,out[9]=pp3b9,out[10]=pp3b10,out[11]=pp3b11,out[12]=pp3b12,out[13]=pp3b13,out[14]=pp3b14,out[15]=pp3b15);
+PP(a = a, b = b[4], out[0] = pp4b0, out[1]=pp4b1,out[2]=pp4b2,out[3]=pp4b3,out[4]=pp4b4,out[5]=pp4b5,out[6]=pp4b6,out[7]=pp4b7,out[8]=pp4b8,out[9]=pp4b9,out[10]=pp4b10,out[11]=pp4b11,out[12]=pp4b12,out[13]=pp4b13,out[14]=pp4b14,out[15]=pp4b15);
+PP(a = a, b = b[5], out[0] = pp5b0, out[1]=pp5b1,out[2]=pp5b2,out[3]=pp5b3,out[4]=pp5b4,out[5]=pp5b5,out[6]=pp5b6,out[7]=pp5b7,out[8]=pp5b8,out[9]=pp5b9,out[10]=pp5b10,out[11]=pp5b11,out[12]=pp5b12,out[13]=pp5b13,out[14]=pp5b14,out[15]=pp5b15);
+PP(a = a, b = b[6], out[0] = pp6b0, out[1]=pp6b1,out[2]=pp6b2,out[3]=pp6b3,out[4]=pp6b4,out[5]=pp6b5,out[6]=pp6b6,out[7]=pp6b7,out[8]=pp6b8,out[9]=pp6b9,out[10]=pp6b10,out[11]=pp6b11,out[12]=pp6b12,out[13]=pp6b13,out[14]=pp6b14,out[15]=pp6b15);
+PP(a = a, b = b[7], out[0] = pp7b0, out[1]=pp7b1,out[2]=pp7b2,out[3]=pp7b3,out[4]=pp7b4,out[5]=pp7b5,out[6]=pp7b6,out[7]=pp7b7,out[8]=pp7b8,out[9]=pp7b9,out[10]=pp7b10,out[11]=pp7b11,out[12]=pp7b12,out[13]=pp7b13,out[14]=pp7b14,out[15]=pp7b15);
+PP(a = a, b = b[8], out[0] = pp8b0, out[1]=pp8b1,out[2]=pp8b2,out[3]=pp8b3,out[4]=pp8b4,out[5]=pp8b5,out[6]=pp8b6,out[7]=pp8b7,out[8]=pp8b8,out[9]=pp8b9,out[10]=pp8b10,out[11]=pp8b11,out[12]=pp8b12,out[13]=pp8b13,out[14]=pp8b14,out[15]=pp8b15);
+PP(a = a, b = b[9], out[0] = pp9b0, out[1]=pp9b1,out[2]=pp9b2,out[3]=pp9b3,out[4]=pp9b4,out[5]=pp9b5,out[6]=pp9b6,out[7]=pp9b7,out[8]=pp9b8,out[9]=pp9b9,out[10]=pp9b10,out[11]=pp9b11,out[12]=pp9b12,out[13]=pp9b13,out[14]=pp9b14,out[15]=pp9b15);
+PP(a = a, b = b[10], out[0] = pp10b0, out[1]=pp10b1,out[2]=pp10b2,out[3]=pp10b3,out[4]=pp10b4,out[5]=pp10b5,out[6]=pp10b6,out[7]=pp10b7,out[8]=pp10b8,out[9]=pp10b9,out[10]=pp10b10,out[11]=pp10b11,out[12]=pp10b12,out[13]=pp10b13,out[14]=pp10b14,out[15]=pp10b15);
+PP(a = a, b = b[11], out[0] = pp11b0, out[1]=pp11b1,out[2]=pp11b2,out[3]=pp11b3,out[4]=pp11b4,out[5]=pp11b5,out[6]=pp11b6,out[7]=pp11b7,out[8]=pp11b8,out[9]=pp11b9,out[10]=pp11b10,out[11]=pp11b11,out[12]=pp11b12,out[13]=pp11b13,out[14]=pp11b14,out[15]=pp11b15);
+PP(a = a, b = b[12], out[0] = pp12b0, out[1]=pp12b1,out[2]=pp12b2,out[3]=pp12b3,out[4]=pp12b4,out[5]=pp12b5,out[6]=pp12b6,out[7]=pp12b7,out[8]=pp12b8,out[9]=pp12b9,out[10]=pp12b10,out[11]=pp12b11,out[12]=pp12b12,out[13]=pp12b13,out[14]=pp12b14,out[15]=pp12b15);
+PP(a = a, b = b[13], out[0] = pp13b0, out[1]=pp13b1,out[2]=pp13b2,out[3]=pp13b3,out[4]=pp13b4,out[5]=pp13b5,out[6]=pp13b6,out[7]=pp13b7,out[8]=pp13b8,out[9]=pp13b9,out[10]=pp13b10,out[11]=pp13b11,out[12]=pp13b12,out[13]=pp13b13,out[14]=pp13b14,out[15]=pp13b15);
+PP(a = a, b = b[14], out[0] = pp14b0, out[1]=pp14b1,out[2]=pp14b2,out[3]=pp14b3,out[4]=pp14b4,out[5]=pp14b5,out[6]=pp14b6,out[7]=pp14b7,out[8]=pp14b8,out[9]=pp14b9,out[10]=pp14b10,out[11]=pp14b11,out[12]=pp14b12,out[13]=pp14b13,out[14]=pp14b14,out[15]=pp14b15);
+PP(a = a, b = b[15], out[0] = pp15b0, out[1]=pp15b1,out[2]=pp15b2,out[3]=pp15b3,out[4]=pp15b4,out[5]=pp15b5,out[6]=pp15b6,out[7]=pp15b7,out[8]=pp15b8,out[9]=pp15b9,out[10]=pp15b10,out[11]=pp15b11,out[12]=pp15b12,out[13]=pp15b13,out[14]=pp15b14,out[15]=pp15b15);
+
+
+// Wallace tree reduction
+
+//col0
+Or(a=pp0b0, b=false, out=outLow[0]);
+
+//col1
+HalfAdder(a=pp0b1, b=pp1b0, sum=outLow[1], carry=c1a);
+
+//col2
+FullAdder(a=pp0b2, b=pp1b1, c=pp2b0, sum=s2a, carry=c2a);
+HalfAdder(a=s2a, b=c1a, sum=outLow[2], carry=c2b);
+
+//col3
+FullAdder(a=pp0b3, b=pp1b2, c=pp2b1, sum=s3a, carry=c3a);
+FullAdder(a=pp3b0, b=c2a, c=c2b, sum=s3b, carry=c3b);
+HalfAdder(a=s3a, b=s3b, sum=outLow[3], carry=c3c);
+
+//col4
+FullAdder(a=pp0b4, b=pp1b3, c=pp2b2, sum=s4a, carry=c4a);
+FullAdder(a=pp3b1, b=pp4b0, c=c3a, sum=s4b, carry=c4b);
+FullAdder(a=c3b, b=c3c, c=s4a, sum=s4c, carry=c4c);
+HalfAdder(a=s4b, b=s4c, sum=outLow[4], carry=c4d);
+
+//col5
+FullAdder(a=pp0b5, b=pp1b4, c=pp2b3, sum=s5a, carry=c5a);
+FullAdder(a=pp3b2, b=pp4b1, c=pp5b0, sum=s5b, carry=c5b);
+FullAdder(a=c4a, b=c4b, c=c4c, sum=s5c, carry=c5c);
+FullAdder(a=c4d, b=s5a, c=s5b, sum=s5d, carry=c5d);
+HalfAdder(a=s5c, b=s5d, sum=outLow[5], carry=c5e);
+
+//col6
+FullAdder(a=pp0b6, b=pp1b5, c=pp2b4, sum=s6a, carry=c6a);
+FullAdder(a=pp3b3, b=pp4b2, c=pp5b1, sum=s6b, carry=c6b);
+FullAdder(a=pp6b0, b=c5a, c=c5b, sum=s6c, carry=c6c);
+FullAdder(a=c5c, b=c5d, c=c5e, sum=s6d, carry=c6d);
+FullAdder(a=s6a, b=s6b, c=s6c, sum=s6e, carry=c6e);
+HalfAdder(a=s6d, b=s6e, sum=outLow[6], carry=c6f);
+
+//col7
+FullAdder(a=pp0b7, b=pp1b6, c=pp2b5, sum=s7a, carry=c7a);
+FullAdder(a=pp3b4, b=pp4b3, c=pp5b2, sum=s7b, carry=c7b);
+FullAdder(a=pp6b1, b=pp7b0, c=c6a, sum=s7c, carry=c7c);
+FullAdder(a=c6b, b=c6c, c=c6d, sum=s7d, carry=c7d);
+FullAdder(a=c6e, b=c6f, c=s7a, sum=s7e, carry=c7e);
+FullAdder(a=s7b, b=s7c, c=s7d, sum=s7f, carry=c7f);
+HalfAdder(a=s7e, b=s7f, sum=outLow[7], carry=c7g);
+
+//col8
+FullAdder(a=pp0b8, b=pp1b7, c=pp2b6, sum=s8a, carry=c8a);
+FullAdder(a=pp3b5, b=pp4b4, c=pp5b3, sum=s8b, carry=c8b);
+FullAdder(a=pp6b2, b=pp7b1, c=pp8b0, sum=s8c, carry=c8c);
+FullAdder(a=c7a, b=c7b, c=c7c, sum=s8d, carry=c8d);
+FullAdder(a=c7d, b=c7e, c=c7f, sum=s8e, carry=c8e);
+FullAdder(a=c7g, b=s8a, c=s8b, sum=s8f, carry=c8f);
+FullAdder(a=s8c, b=s8d, c=s8e, sum=s8g, carry=c8g);
+HalfAdder(a=s8f, b=s8g, sum=outLow[8], carry=c8h);
+
+//col9
+FullAdder(a=pp0b9, b=pp1b8, c=pp2b7, sum=s9a, carry=c9a);
+FullAdder(a=pp3b6, b=pp4b5, c=pp5b4, sum=s9b, carry=c9b);
+FullAdder(a=pp6b3, b=pp7b2, c=pp8b1, sum=s9c, carry=c9c);
+FullAdder(a=pp9b0, b=c8a, c=c8b, sum=s9d, carry=c9d);
+FullAdder(a=c8c, b=c8d, c=c8e, sum=s9e, carry=c9e);
+FullAdder(a=c8f, b=c8g, c=c8h, sum=s9f, carry=c9f);
+FullAdder(a=s9a, b=s9b, c=s9c, sum=s9g, carry=c9g);
+FullAdder(a=s9d, b=s9e, c=s9f, sum=s9h, carry=c9h);
+HalfAdder(a=s9g, b=s9h, sum=outLow[9], carry=c9i);
+
+//col10
+FullAdder(a=pp0b10, b=pp1b9, c=pp2b8, sum=s10a, carry=c10a);
+FullAdder(a=pp3b7, b=pp4b6, c=pp5b5, sum=s10b, carry=c10b);
+FullAdder(a=pp6b4, b=pp7b3, c=pp8b2, sum=s10c, carry=c10c);
+FullAdder(a=pp9b1, b=pp10b0, c=c9a, sum=s10d, carry=c10d);
+FullAdder(a=c9b, b=c9c, c=c9d, sum=s10e, carry=c10e);
+FullAdder(a=c9e, b=c9f, c=c9g, sum=s10f, carry=c10f);
+FullAdder(a=c9h, b=c9i, c=s10a, sum=s10g, carry=c10g);
+FullAdder(a=s10b, b=s10c, c=s10d, sum=s10h, carry=c10h);
+FullAdder(a=s10e, b=s10f, c=s10g, sum=s10i, carry=c10i);
+HalfAdder(a=s10h, b=s10i, sum=outLow[10], carry=c10j);
+
+//col11
+FullAdder(a=pp0b11, b=pp1b10, c=pp2b9, sum=s11a, carry=c11a);
+FullAdder(a=pp3b8, b=pp4b7, c=pp5b6, sum=s11b, carry=c11b);
+FullAdder(a=pp6b5, b=pp7b4, c=pp8b3, sum=s11c, carry=c11c);
+FullAdder(a=pp9b2, b=pp10b1, c=pp11b0, sum=s11d, carry=c11d);
+
+FullAdder(a=c10a, b=c10b, c=c10c, sum=s11e, carry=c11e);
+FullAdder(a=c10d, b=c10e, c=c10f, sum=s11f, carry=c11f);
+FullAdder(a=c10g, b=c10h, c=c10i, sum=s11g, carry=c11g);
+
+FullAdder(a=c10j, b=s11a, c=s11b, sum=s11h, carry=c11h);
+FullAdder(a=s11c, b=s11d, c=s11e, sum=s11i, carry=c11i);
+FullAdder(a=s11f, b=s11g, c=s11h, sum=s11j, carry=c11j);
+
+HalfAdder(a=s11i, b=s11j, sum=outLow[11], carry=c11k);
+
+//col12
+FullAdder(a=pp0b12, b=pp1b11, c=pp2b10, sum=s12a, carry=c12a);
+FullAdder(a=pp3b9, b=pp4b8, c=pp5b7, sum=s12b, carry=c12b);
+FullAdder(a=pp6b6, b=pp7b5, c=pp8b4, sum=s12c, carry=c12c);
+FullAdder(a=pp9b3, b=pp10b2, c=pp11b1, sum=s12d, carry=c12d);
+
+FullAdder(a=pp12b0, b=c11a, c=c11b, sum=s12e, carry=c12e);
+FullAdder(a=c11c, b=c11d, c=c11e, sum=s12f, carry=c12f);
+FullAdder(a=c11f, b=c11g, c=c11h, sum=s12g, carry=c12g);
+FullAdder(a=c11i, b=c11j, c=c11k, sum=s12h, carry=c12h);
+
+FullAdder(a=s12a, b=s12b, c=s12c, sum=s12i, carry=c12i);
+FullAdder(a=s12d, b=s12e, c=s12f, sum=s12j, carry=c12j);
+FullAdder(a=s12g, b=s12h, c=s12i, sum=s12k, carry=c12k);
+
+HalfAdder(a=s12j, b=s12k, sum=outLow[12], carry=c12l);
+
+//col13
+FullAdder(a=pp0b13, b=pp1b12, c=pp2b11, sum=s13a, carry=c13a);
+FullAdder(a=pp3b10, b=pp4b9, c=pp5b8, sum=s13b, carry=c13b);
+FullAdder(a=pp6b7, b=pp7b6, c=pp8b5, sum=s13c, carry=c13c);
+FullAdder(a=pp9b4, b=pp10b3, c=pp11b2, sum=s13d, carry=c13d);
+
+FullAdder(a=pp12b1, b=pp13b0, c=c12a, sum=s13e, carry=c13e);
+FullAdder(a=c12b, b=c12c, c=c12d, sum=s13f, carry=c13f);
+FullAdder(a=c12e, b=c12f, c=c12g, sum=s13g, carry=c13g);
+FullAdder(a=c12h, b=c12i, c=c12j, sum=s13h, carry=c13h);
+
+FullAdder(a=c12k, b=c12l, c=s13a, sum=s13i, carry=c13i);
+FullAdder(a=s13b, b=s13c, c=s13d, sum=s13j, carry=c13j);
+FullAdder(a=s13e, b=s13f, c=s13g, sum=s13k, carry=c13k);
+
+FullAdder(a=s13h, b=s13i, c=s13j, sum=s13l, carry=c13l);
+
+HalfAdder(a=s13k, b=s13l, sum=outLow[13], carry=c13m);
+
+//col14
+FullAdder(a=pp0b14, b=pp1b13, c=pp2b12, sum=s14a, carry=c14a);
+FullAdder(a=pp3b11, b=pp4b10, c=pp5b9, sum=s14b, carry=c14b);
+FullAdder(a=pp6b8, b=pp7b7, c=pp8b6, sum=s14c, carry=c14c);
+FullAdder(a=pp9b5, b=pp10b4, c=pp11b3, sum=s14d, carry=c14d);
+FullAdder(a=pp12b2, b=pp13b1, c=pp14b0, sum=s14e, carry=c14e);
+
+FullAdder(a=c13a, b=c13b, c=c13c, sum=s14f, carry=c14f);
+FullAdder(a=c13d, b=c13e, c=c13f, sum=s14g, carry=c14g);
+FullAdder(a=c13g, b=c13h, c=c13i, sum=s14h, carry=c14h);
+FullAdder(a=c13j, b=c13k, c=c13l, sum=s14i, carry=c14i);
+
+FullAdder(a=c13m, b=s14a, c=s14b, sum=s14j, carry=c14j);
+FullAdder(a=s14c, b=s14d, c=s14e, sum=s14k, carry=c14k);
+FullAdder(a=s14f, b=s14g, c=s14h, sum=s14l, carry=c14l);
+
+FullAdder(a=s14i, b=s14j, c=s14k, sum=s14m, carry=c14m);
+
+HalfAdder(a=s14l, b=s14m, sum=outLow[14], carry=c14n);
+
+//col15
+FullAdder(a=pp0b15, b=pp1b14, c=pp2b13, sum=s15a, carry=c15a);
+FullAdder(a=pp3b12, b=pp4b11, c=pp5b10, sum=s15b, carry=c15b);
+FullAdder(a=pp6b9, b=pp7b8, c=pp8b7, sum=s15c, carry=c15c);
+FullAdder(a=pp9b6, b=pp10b5, c=pp11b4, sum=s15d, carry=c15d);
+FullAdder(a=pp12b3, b=pp13b2, c=pp14b1, sum=s15e, carry=c15e);
+
+FullAdder(a=pp15b0, b=c14a, c=c14b, sum=s15f, carry=c15f);
+FullAdder(a=c14c, b=c14d, c=c14e, sum=s15g, carry=c15g);
+FullAdder(a=c14f, b=c14g, c=c14h, sum=s15h, carry=c15h);
+FullAdder(a=c14i, b=c14j, c=c14k, sum=s15i, carry=c15i);
+
+FullAdder(a=c14l, b=c14m, c=c14n, sum=s15j, carry=c15j);
+
+FullAdder(a=s15a, b=s15b, c=s15c, sum=s15k, carry=c15k);
+FullAdder(a=s15d, b=s15e, c=s15f, sum=s15l, carry=c15l);
+FullAdder(a=s15g, b=s15h, c=s15i, sum=s15m, carry=c15m);
+
+FullAdder(a=s15j, b=s15k, c=s15l, sum=s15n, carry=c15n);
+
+HalfAdder(a=s15m, b=s15n, sum=outLow[15], carry=c15o);
+
+//col16
+FullAdder(a=pp1b15, b=pp2b14, c=pp3b13, sum=s16a, carry=c16a);
+FullAdder(a=pp4b12, b=pp5b11, c=pp6b10, sum=s16b, carry=c16b);
+FullAdder(a=pp7b9, b=pp8b8, c=pp9b7, sum=s16c, carry=c16c);
+FullAdder(a=pp10b6, b=pp11b5, c=pp12b4, sum=s16d, carry=c16d);
+FullAdder(a=pp13b3, b=pp14b2, c=pp15b1, sum=s16e, carry=c16e);
+
+FullAdder(a=c15a, b=c15b, c=c15c, sum=s16f, carry=c16f);
+FullAdder(a=c15d, b=c15e, c=c15f, sum=s16g, carry=c16g);
+FullAdder(a=c15g, b=c15h, c=c15i, sum=s16h, carry=c16h);
+FullAdder(a=c15j, b=c15k, c=c15l, sum=s16i, carry=c16i);
+
+FullAdder(a=c15m, b=c15n, c=c15o, sum=s16j, carry=c16j);
+
+FullAdder(a=s16a, b=s16b, c=s16c, sum=s16k, carry=c16k);
+FullAdder(a=s16d, b=s16e, c=s16f, sum=s16l, carry=c16l);
+FullAdder(a=s16g, b=s16h, c=s16i, sum=s16m, carry=c16m);
+
+FullAdder(a=s16j, b=s16k, c=s16l, sum=s16n, carry=c16n);
+
+HalfAdder(a=s16m, b=s16n, sum=outHigh[0], carry=c16o);
+
+//col17
+FullAdder(a=pp2b15, b=pp3b14, c=pp4b13, sum=s17a, carry=c17a);
+FullAdder(a=pp5b12, b=pp6b11, c=pp7b10, sum=s17b, carry=c17b);
+FullAdder(a=pp8b9, b=pp9b8, c=pp10b7, sum=s17c, carry=c17c);
+FullAdder(a=pp11b6, b=pp12b5, c=pp13b4, sum=s17d, carry=c17d);
+FullAdder(a=pp14b3, b=pp15b2, c=c16a, sum=s17e, carry=c17e);
+
+FullAdder(a=c16b, b=c16c, c=c16d, sum=s17f, carry=c17f);
+FullAdder(a=c16e, b=c16f, c=c16g, sum=s17g, carry=c17g);
+FullAdder(a=c16h, b=c16i, c=c16j, sum=s17h, carry=c17h);
+FullAdder(a=c16k, b=c16l, c=c16m, sum=s17i, carry=c17i);
+
+FullAdder(a=c16n, b=c16o, c=s17a, sum=s17j, carry=c17j);
+
+FullAdder(a=s17b, b=s17c, c=s17d, sum=s17k, carry=c17k);
+FullAdder(a=s17e, b=s17f, c=s17g, sum=s17l, carry=c17l);
+FullAdder(a=s17h, b=s17i, c=s17j, sum=s17m, carry=c17m);
+
+FullAdder(a=s17k, b=s17l, c=s17m, sum=outHigh[1], carry=c17n);
+
+//col18
+FullAdder(a=pp3b15, b=pp4b14, c=pp5b13, sum=s18a, carry=c18a);
+FullAdder(a=pp6b12, b=pp7b11, c=pp8b10, sum=s18b, carry=c18b);
+FullAdder(a=pp9b9, b=pp10b8, c=pp11b7, sum=s18c, carry=c18c);
+FullAdder(a=pp12b6, b=pp13b5, c=pp14b4, sum=s18d, carry=c18d);
+
+FullAdder(a=pp15b3, b=c17a, c=c17b, sum=s18e, carry=c18e);
+FullAdder(a=c17c, b=c17d, c=c17e, sum=s18f, carry=c18f);
+FullAdder(a=c17f, b=c17g, c=c17h, sum=s18g, carry=c18g);
+FullAdder(a=c17i, b=c17j, c=c17k, sum=s18h, carry=c18h);
+FullAdder(a=c17l, b=c17m, c=c17n, sum=s18i, carry=c18i);
+
+
+FullAdder(a=s18a, b=s18b, c=s18c, sum=s18j, carry=c18j);
+FullAdder(a=s18d, b=s18e, c=s18f, sum=s18k, carry=c18k);
+FullAdder(a=s18g, b=s18h, c=s18i, sum=s18l, carry=c18l);
+
+FullAdder(a=s18j, b=s18k, c=s18l, sum=outHigh[2], carry=c18m);
+
+//col19
+FullAdder(a=pp4b15, b=pp5b14, c=pp6b13, sum=s19a, carry=c19a);
+FullAdder(a=pp7b12, b=pp8b11, c=pp9b10, sum=s19b, carry=c19b);
+FullAdder(a=pp10b9, b=pp11b8, c=pp12b7, sum=s19c, carry=c19c);
+FullAdder(a=pp13b6, b=pp14b5, c=pp15b4, sum=s19d, carry=c19d);
+
+FullAdder(a=c18a, b=c18b, c=c18c, sum=s19e, carry=c19e);
+FullAdder(a=c18d, b=c18e, c=c18f, sum=s19f, carry=c19f);
+FullAdder(a=c18g, b=c18h, c=c18i, sum=s19g, carry=c19g);
+FullAdder(a=c18j, b=c18k, c=c18l, sum=s19h, carry=c19h);
+
+FullAdder(a=s19a, b=s19b, c=s19c, sum=s19i, carry=c19i);
+FullAdder(a=s19d, b=s19e, c=s19f, sum=s19j, carry=c19j);
+FullAdder(a=s19g, b=s19h, c=c18m, sum=s19k, carry=c19k);
+
+FullAdder(a=s19i, b=s19j, c=s19k, sum=outHigh[3], carry=c19l);
+
+//col20
+FullAdder(a=pp5b15, b=pp6b14, c=pp7b13, sum=s20a, carry=c20a);
+FullAdder(a=pp8b12, b=pp9b11, c=pp10b10, sum=s20b, carry=c20b);
+FullAdder(a=pp11b9, b=pp12b8, c=pp13b7, sum=s20c, carry=c20c);
+FullAdder(a=pp14b6, b=pp15b5, c=c19a, sum=s20d, carry=c20d);
+
+FullAdder(a=c19b, b=c19c, c=c19d, sum=s20e, carry=c20e);
+FullAdder(a=c19e, b=c19f, c=c19g, sum=s20f, carry=c20f);
+FullAdder(a=c19h, b=c19i, c=c19j, sum=s20g, carry=c20g);
+
+FullAdder(a=s20a, b=s20b, c=s20c, sum=s20h, carry=c20h);
+FullAdder(a=s20d, b=s20e, c=s20f, sum=s20i, carry=c20i);
+FullAdder(a=s20g, b=c19k, c=c19l, sum=s20j, carry=c20j);
+
+FullAdder(a=s20h, b=s20i, c=s20j, sum=outHigh[4], carry=c20k);
+
+//col21
+FullAdder(a=pp6b15, b=pp7b14, c=pp8b13, sum=s21a, carry=c21a);
+FullAdder(a=pp9b12, b=pp10b11, c=pp11b10, sum=s21b, carry=c21b);
+FullAdder(a=pp12b9, b=pp13b8, c=pp14b7, sum=s21c, carry=c21c);
+FullAdder(a=pp15b6, b=c20a, c=c20b, sum=s21d, carry=c21d);
+
+FullAdder(a=c20c, b=c20d, c=c20e, sum=s21e, carry=c21e);
+FullAdder(a=c20f, b=c20g, c=c20h, sum=s21f, carry=c21f);
+FullAdder(a=c20i, b=c20j, c=c20k, sum=s21g, carry=c21g);
+
+FullAdder(a=s21a, b=s21b, c=s21c, sum=s21h, carry=c21h);
+FullAdder(a=s21d, b=s21e, c=s21f, sum=s21i, carry=c21i);
+
+FullAdder(a=s21h, b=s21i, c=s21g, sum=outHigh[5], carry=c21j);
+
+//col22
+FullAdder(a=pp7b15, b=pp8b14, c=pp9b13, sum=s22a, carry=c22a);
+FullAdder(a=pp10b12, b=pp11b11, c=pp12b10, sum=s22b, carry=c22b);
+FullAdder(a=pp13b9, b=pp14b8, c=pp15b7, sum=s22c, carry=c22c);
+
+FullAdder(a=c21a, b=c21b, c=c21c, sum=s22d, carry=c22d);
+FullAdder(a=c21d, b=c21e, c=c21f, sum=s22e, carry=c22e);
+FullAdder(a=c21g, b=c21h, c=c21i, sum=s22f, carry=c22f);
+
+FullAdder(a=s22a, b=s22b, c=s22c, sum=s22g, carry=c22g);
+FullAdder(a=s22d, b=s22e, c=s22f, sum=s22h, carry=c22h);
+
+FullAdder(a=s22g, b=s22h, c=c21j, sum=outHigh[6], carry=c22i);
+
+//col23
+FullAdder(a=pp8b15, b=pp9b14, c=pp10b13, sum=s23a, carry=c23a);
+FullAdder(a=pp11b12, b=pp12b11, c=pp13b10, sum=s23b, carry=c23b);
+FullAdder(a=pp14b9, b=pp15b8, c=c22a, sum=s23c, carry=c23c);
+
+FullAdder(a=c22b, b=c22c, c=c22d, sum=s23d, carry=c23d);
+FullAdder(a=c22e, b=c22f, c=c22g, sum=s23e, carry=c23e);
+
+FullAdder(a=s23a, b=s23b, c=s23c, sum=s23f, carry=c23f);
+FullAdder(a=s23d, b=s23e, c=c22h, sum=s23g, carry=c23g);
+
+FullAdder(a=s23f, b=s23g, c=c22i, sum=outHigh[7], carry=c23h);
+
+//col24
+FullAdder(a=pp9b15, b=pp10b14, c=pp11b13, sum=s24a, carry=c24a);
+FullAdder(a=pp12b12, b=pp13b11, c=pp14b10, sum=s24b, carry=c24b);
+FullAdder(a=pp15b9, b=c23a, c=c23b, sum=s24c, carry=c24c);
+FullAdder(a=c23c, b=c23d, c=c23e, sum=s24d, carry=c24d);
+FullAdder(a=c23f, b=c23g, c=c23h, sum=s24e, carry=c24e);
+FullAdder(a=s24a, b=s24b, c=s24c, sum=s24f, carry=c24f);
+
+FullAdder(a=s24f, b=s24d, c=s24e, sum=outHigh[8], carry=c24g);
+
+//col25
+FullAdder(a=pp10b15, b=pp11b14, c=pp12b13, sum=s25a, carry=c25a);
+FullAdder(a=pp13b12, b=pp14b11, c=pp15b10, sum=s25b, carry=c25b);
+FullAdder(a=c24a, b=c24b, c=c24c, sum=s25c, carry=c25c);
+FullAdder(a=c24d, b=c24e, c=c24f, sum=s25d, carry=c25d);
+
+FullAdder(a=s25a, b=s25b, c=s25c, sum=s25e, carry=c25e);
+
+FullAdder(a=s25e, b=s25d, c=c24g, sum=outHigh[9], carry=c25f);
+
+//col26
+FullAdder(a=pp11b15, b=pp12b14, c=pp13b13, sum=s26a, carry=c26a);
+FullAdder(a=pp14b12, b=pp15b11, c=c25a, sum=s26b, carry=c26b);
+FullAdder(a=c25b, b=c25c, c=c25d, sum=s26c, carry=c26c);
+
+FullAdder(a=s26a, b=s26b, c=s26c, sum=s26d, carry=c26d);
+
+FullAdder(a=s26d, b=c25e, c=c25f, sum=outHigh[10], carry=c26e);
+
+//col27
+FullAdder(a=pp12b15, b=pp13b14, c=pp14b13, sum=s27a, carry=c27a);
+FullAdder(a=pp15b12, b=c26a, c=c26b, sum=s27b, carry=c27b);
+FullAdder(a=c26c, b=c26d, c=c26e, sum=s27c, carry=c27c);
+
+FullAdder(a=s27a, b=s27b, c=s27c, sum=outHigh[11], carry=c27d);
+
+//col28
+FullAdder(a=pp13b15, b=pp14b14, c=pp15b13, sum=s28a, carry=c28a);
+FullAdder(a=c27a, b=c27b, c=c27c, sum=s28b, carry=c28b);
+// c27d is leftover and bypasses Level 1
+
+FullAdder(a=s28a, b=s28b, c=c27d, sum=outHigh[12], carry=c28c);
+
+//col29
+FullAdder(a=pp14b15, b=pp15b14, c=c28a, sum=s29a, carry=c29a);
+
+FullAdder(a=s29a, b=c28b, c=c28c, sum=outHigh[13], carry=c29b);
+
+//col30
+FullAdder(a=pp15b15, b=c29a, c=c29b, sum=outHigh[14], carry=c30a);
+
+//col31
+Or(a=c30a, b=false, out=outHigh[15]);
+
+}
