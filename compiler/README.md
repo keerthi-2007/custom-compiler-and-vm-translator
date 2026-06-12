@@ -1,4 +1,4 @@
-src/
+* src/
 * ├── JackTokenizer.py
 * ├── CompilationEngine.py
 * ├── SymbolTable.py
@@ -6,9 +6,9 @@ src/
 * ├── JackCompiler.py
 * └── README.md
 
-jack/
-├── Conv.jack
-└── Main.jack
+* jack/
+* ├── Conv.jack
+* └── Main.jack
 
 VMfiles/
 ├── Conv.vm
