@@ -91,7 +91,7 @@ screenshots/
 - End-to-end compiler construction
 
 # Author
-Vallem Keerthi Reddy
-B.Tech in Artificial Intelligence and Data Analytics
-Indian Institute of Technology Madras
+- Vallem Keerthi Reddy
+- B.Tech in Artificial Intelligence and Data Analytics
+- Indian Institute of Technology Madras
 
