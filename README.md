@@ -65,18 +65,15 @@ This served as an end-to-end test case for the compiler and VM translator.
 
 # Repository Structure
 * hardware
-* │ 
 * ├── Memory Components 
 * ├── RAM Modules 
 * ├── Multiplier 
 * └── ALU
 * vm-translator 
-* │ 
 * ├── main.py 
 * ├── parser.py 
 * └── code_writer.py 
 * compiler
-* │ 
 * ├── JackTokenizer.py 
 * ├── CompilationEngine.py 
 * ├── SymbolTable.py 
