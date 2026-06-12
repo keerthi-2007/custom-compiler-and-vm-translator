@@ -1,0 +1,113 @@
+class Conv {
+    static Array ArrayFilter;
+    static int stride;
+    field Array ArrayInput;
+    field Array ArrayOutput;
+    field int ArraySize;
+
+    constructor Conv new(int N) {
+        var int O;
+        var int temp;
+        let stride = 1;
+        let ArraySize = N;
+        let ArrayFilter = Array.new(9);
+        let ArrayInput = Array.new(N * N);
+        if (N < 3) {
+            let O = 1;
+        } else {
+            let temp = N - 3;
+            let temp = temp / stride;
+            let O = temp + 1;
+        }
+        let ArrayOutput = Array.new(O * O);
+        return this;
+    }
+
+    method void initFilter(Array values) {
+        var int i;
+        let i = 0;
+        while (i < 9) {
+            let ArrayFilter[i] = values[i];
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void getArrayInput(Array input, int size) {
+        let ArrayInput = input;
+        let ArraySize = size;
+        return;
+    }
+
+    method int calcOutputDim() {
+        var int temp;
+        var int result;
+        let temp = ArraySize - 3;
+        let temp = temp / stride;
+        let result = temp + 1;
+        return result;
+    }
+
+    method void conv2d() {
+        var int O, i, j, m, n;
+        var int total, startRow, startCol;
+        var int inputIndex, filterIndex, outputIndex;
+        var int rowTimesSize, mTimesStride, nVal;
+        if (ArraySize < 3) {
+            do Memory.poke(8000, -1);
+            return;
+        }
+        let O = calcOutputDim();
+        let i = 0;
+        while (i < O) {
+            let j = 0;
+            while (j < O) {
+                let total = 0;
+                let startRow = i * stride;
+                let startCol = j * stride;
+                let m = 0;
+                while (m < 3) {
+                    let n = 0;
+                    while (n < 3) {
+                        let rowTimesSize = (startRow + m) * ArraySize;
+                        let inputIndex = rowTimesSize + startCol + n;
+                        let filterIndex = (m * 3) + n;
+                        let total = total + (ArrayInput[inputIndex] * ArrayFilter[filterIndex]);
+                        let n = n + 1;
+                    }
+                    let m = m + 1;
+                }
+                let outputIndex = (i * O) + j;
+                let ArrayOutput[outputIndex] = total;
+                let j = j + 1;
+            }
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void printOutput() {
+        var int O, i, j, index;
+        let O = calcOutputDim();
+        let i = 0;
+        while (i < O) {
+            let j = 0;
+            while (j < O) {
+                let index = (i * O) + j;
+                do Output.printInt(ArrayOutput[index]);
+                do Output.printChar(32);
+                let j = j + 1;
+            }
+            do Output.println();
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void dispose() {
+        do Memory.deAlloc(ArrayInput);
+        do Memory.deAlloc(ArrayOutput);
+        do Memory.deAlloc(this);
+        return;
+    }
+}
