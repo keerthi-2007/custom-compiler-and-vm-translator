@@ -1,10 +1,10 @@
 src/
-├── JackTokenizer.py
-├── CompilationEngine.py
-├── SymbolTable.py
-├── VMWriter.py
-├── JackCompiler.py
-└── README.md
+* ├── JackTokenizer.py
+* ├── CompilationEngine.py
+* ├── SymbolTable.py
+* ├── VMWriter.py
+* ├── JackCompiler.py
+* └── README.md
 
 jack/
 ├── Conv.jack
