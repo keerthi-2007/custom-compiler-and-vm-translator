@@ -24,7 +24,7 @@ Hack Machine Code
 
 # Hardware Design
 The hardware portion focuses on memory architecture and processor extensions using Hack HDL
-Implemented components include:
+* Implemented components include:
 - 1-bit and 16-bit Registers
 - RAM hierarchy and memory modules
 - Addressing and memory management circuits
@@ -34,7 +34,7 @@ This stage provided hands-on experience with sequential logic, memory organizati
 
 # Virtual Machine Translator
 A VM Translator was implemented in Python to convert Hack Virtual Machine instructions into Hack Assembly language.
-Supported functionality:
+* Supported functionality:
 - Stack arithmetic operations
 - Memory access commands
 - Program flow instructions
@@ -44,7 +44,7 @@ The translator forms the bridge between the high-level VM abstraction and the un
 
 # Compiler Construction
 A compiler frontend for the Jack programming language was implemented in Python.
-Components:
+* Components:
 - # Tokenizer
   Performs lexical analysis by converting Jack source code into a stream of tokens while handling comments, symbols, identifiers, keywords, and constants.
 - # Parser
@@ -56,7 +56,7 @@ Components:
 
 # Demonstration Program
 To validate the complete compilation pipeline, a 2D Convolution application was implemented in Jack.
-The program:
+* The program:
 - Accepts a flattened input matrix
 - Applies a 3×3 convolution filter
 - Supports configurable stride values
